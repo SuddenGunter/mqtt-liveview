@@ -17,7 +17,8 @@ defmodule MqttLiveviewWeb.Router do
   scope "/", MqttLiveviewWeb do
     pipe_through :browser
 
-    live "/", TopicLive, :topic_live
+    live "/", TopicSelectorLive, :topic_selector_live
+    live "/topic/:topic_name", TopicLive, :topic_live
   end
 
   # Other scopes may use custom stacks.
