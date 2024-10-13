@@ -20,7 +20,7 @@ defmodule MqttLiveviewWeb.TopicLive do
   def handle_info(msg_payload, socket) do
     Logger.error(msg_payload)
     messages = [msg_payload | socket.assigns.msg]
-    # todo why resend all values on each send
+    # todo why resend all values on each send https://hexdocs.pm/phoenix_live_view/0.20.4/dom-patching.html
     {:noreply, assign(socket, msg: messages)}
   end
 end
