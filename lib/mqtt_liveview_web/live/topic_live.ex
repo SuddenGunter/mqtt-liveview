@@ -12,12 +12,14 @@ defmodule MqttLiveviewWeb.TopicLive do
       MqttLiveview.Topic.PubSub.subscribe("mqtt")
     end
 
-    {:ok, assign(socket, msg: nil)}
+    {:ok, assign(socket, msg: [])}
   end
 
   @impl true
   def handle_info(msg_payload, socket) do
     Logger.error(msg_payload)
-    {:noreply, assign(socket, msg: msg_payload)}
+    # todo fix
+    messages = [msg_payload | socket.assigns.msg]
+    {:noreply, assign(socket, msg: messages)}
   end
 end

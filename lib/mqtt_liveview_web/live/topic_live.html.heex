@@ -1,4 +1,7 @@
 <div>
   <p>Loading messages (todo set page header to be topic name)</p>
-  <p><%= @msg %></p>
+
+  <%= for x <- @msg do %>
+    <p><%= x %></p>
+  <% end %>
 </div>
