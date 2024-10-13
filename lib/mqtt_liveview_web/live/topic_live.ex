@@ -9,6 +9,7 @@ defmodule MqttLiveviewWeb.TopicLive do
   def mount(params, _session, socket) do
     if connected?(socket) do
       Logger.error("mqtt/#{params["topic_name"]}")
+      # todo fix topic name
       MqttLiveview.Topic.PubSub.subscribe("mqtt")
     end
 
@@ -18,8 +19,8 @@ defmodule MqttLiveviewWeb.TopicLive do
   @impl true
   def handle_info(msg_payload, socket) do
     Logger.error(msg_payload)
-    # todo fix
     messages = [msg_payload | socket.assigns.msg]
+    # todo why resend all values on each send
     {:noreply, assign(socket, msg: messages)}
   end
 end
