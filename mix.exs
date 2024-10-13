@@ -54,7 +54,7 @@ defmodule MqttLiveview.MixProject do
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.5"},
-      {:emqtt, git: "https://github.com/emqx/emqtt", tag: "v1.2.0"}
+      {:exmqtt, github: "suddengunter/exmqtt", tag: "0.2.1"}
     ]
   end
 

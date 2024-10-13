@@ -50,6 +50,18 @@ if config_env() == :prod do
     ],
     secret_key_base: secret_key_base
 
+  mqtthost = System.get_env("MQTT_HOST")
+  mqttport = String.to_integer(System.get_env("MQTT_PORT") || "1883")
+
+  mqttuser = System.get_env("MQTT_USER")
+  mqttpass = System.get_env("MQTT_PASS")
+
+  config :mqtt_liveview, :mqtt,
+    host: mqtthost,
+    port: mqttport,
+    username: mqttuser,
+    password: mqttpass
+
   # ## SSL Support
   #
   # To get SSL working, you will need to add the `https` key

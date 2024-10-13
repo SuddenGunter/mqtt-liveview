@@ -7,6 +7,8 @@ defmodule MqttLiveview.Application do
 
   @impl true
   def start(_type, _args) do
+    mqttconf = Application.get_env(:mqtt_liveview, :mqtt)
+
     children = [
       MqttLiveviewWeb.Telemetry,
       {DNSCluster, query: Application.get_env(:mqtt_liveview, :dns_cluster_query) || :ignore},
@@ -14,7 +16,15 @@ defmodule MqttLiveview.Application do
       # Start a worker by calling: MqttLiveview.Worker.start_link(arg)
       # {MqttLiveview.Worker, arg},
       # Start to serve requests, typically the last entry
-      MqttLiveviewWeb.Endpoint
+      MqttLiveviewWeb.Endpoint,
+      {ExMQTT.Supervisor,
+       message_handler: {MqttLiveview.Topic.TopicListener, []},
+       publish_handler: {MqttLiveview.Topic.TopicListener, []},
+       host: mqttconf[:host],
+       port: mqttconf[:port],
+       username: mqttconf[:username],
+       password: mqttconf[:password],
+       subscriptions: [{"test", 0}]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

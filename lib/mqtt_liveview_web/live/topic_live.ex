@@ -7,6 +7,12 @@ defmodule MqttLiveviewWeb.TopicLive do
           {:ok, any()}
 
   def mount(params, _session, socket) do
+    if connected?(socket) do
+      # ExMQTT.subscribe(params["topic_name"], 1)
+
+      # MqttLiveview.Topic.PubSub.subscribe()
+    end
+
     {:ok, socket}
   end
 end

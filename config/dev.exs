@@ -56,7 +56,11 @@ config :mqtt_liveview, MqttLiveviewWeb.Endpoint,
 config :mqtt_liveview, dev_routes: true
 
 # Do not include metadata nor timestamps in development logs
-config :logger, :console, format: "[$level] $message\n"
+config :logger, :console,
+  format: "[$level] $message\n",
+  compile_time_purge_matching: [
+    [module: ExMQTT, level_lower_than: :error]
+  ]
 
 # Set a higher stacktrace during development. Avoid configuring such
 # in production as building large stacktraces may be expensive.
@@ -70,3 +74,9 @@ config :phoenix_live_view,
   debug_heex_annotations: true,
   # Enable helpful, but potentially expensive runtime checks
   enable_expensive_runtime_checks: true
+
+config :mqtt_liveview, :mqtt,
+  host: "localhost",
+  port: 1883,
+  username: "mqttliveview",
+  password: "mqttliveview"

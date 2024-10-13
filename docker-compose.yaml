@@ -2,8 +2,9 @@ services:
     mqtt:
         image: eclipse-mosquitto:2.0
         restart: unless-stopped
+        command: 'mosquitto -c /mqttconf/custom.conf'
         volumes:
-            - './mosquitto_data:/mosquitto'
+            - 'mosquitto_data:/mosquitto'
             - './mosquitto/custom.conf:/mqttconf/custom.conf'
             - './mosquitto/mqttcreds.txt:/mqttconf/mqttcreds.txt'
         ports:
