@@ -2,12 +2,10 @@ defmodule MqttLiveview.Topic.PubSub do
   alias Phoenix.PubSub
 
   def subscribe(topic) do
-    # todo fix topic name
-    PubSub.subscribe(MqttLiveview.PubSub, "mqtt")
+    PubSub.subscribe(MqttLiveview.PubSub, "mqtt/#{topic}")
   end
 
   def publish(topic, msg) do
-    # todo fix topic name
-    PubSub.broadcast(MqttLiveview.PubSub, "mqtt", msg)
+    PubSub.broadcast(MqttLiveview.PubSub, "mqtt/#{topic}", msg)
   end
 end

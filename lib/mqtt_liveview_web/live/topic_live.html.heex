@@ -1,7 +1,9 @@
 <div>
-  <p>Loading messages (todo set page header to be topic name)</p>
+  <h1 class="text-lg font-bold"><%= @topic %></h1>
 
-  <%= for x <- @msg do %>
-    <p><%= x %></p>
-  <% end %>
+  <div id="messages" phx-update="stream">
+    <p :for={{dom_id, msg} <- @streams.messages} id={dom_id}>
+      <%= msg %>
+    </p>
+  </div>
 </div>
