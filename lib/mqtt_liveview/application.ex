@@ -18,13 +18,11 @@ defmodule MqttLiveview.Application do
       # Start to serve requests, typically the last entry
       MqttLiveviewWeb.Endpoint,
       {ExMQTT.Supervisor,
-       message_handler: {MqttLiveview.Topic.TopicListener, []},
-       publish_handler: {MqttLiveview.Topic.TopicListener, []},
+       publish_handler: {MqttLiveview.Topic.Listener, []},
        host: mqttconf[:host],
        port: mqttconf[:port],
        username: mqttconf[:username],
-       password: mqttconf[:password],
-       subscriptions: [{"test", 0}]}
+       password: mqttconf[:password]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

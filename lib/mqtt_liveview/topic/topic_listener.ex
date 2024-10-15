@@ -1,17 +1,12 @@
-defmodule MqttLiveview.Topic.TopicListener do
+defmodule MqttLiveview.Topic.Listener do
   require Logger
-  @behaviour ExMQTT.MessageHandler
+  alias MqttLiveview.Topic.PubSub
+
   @behaviour ExMQTT.PublishHandler
 
   @impl true
-  def handle_message(topic, message, _extra) do
-    Logger.warning("MSG")
-    :ok
-  end
-
-  @impl true
-  def handle_publish(message, _extra) do
-    Logger.warning("PUB")
+  def handle_publish(%{payload: payload, topic: topic}, _extra) do
+    PubSub.publish(topic, payload)
     :ok
   end
 end

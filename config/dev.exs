@@ -56,11 +56,10 @@ config :mqtt_liveview, MqttLiveviewWeb.Endpoint,
 config :mqtt_liveview, dev_routes: true
 
 # Do not include metadata nor timestamps in development logs
-config :logger, :console,
-  format: "[$level] $message\n",
-  compile_time_purge_matching: [
-    [module: ExMQTT, level_lower_than: :error]
-  ]
+config :logger, :console, format: "[$level] $message\n"
+
+Logger.put_module_level(ExMQTT, :info)
+Logger.put_module_level(:emqtt, :info)
 
 # Set a higher stacktrace during development. Avoid configuring such
 # in production as building large stacktraces may be expensive.

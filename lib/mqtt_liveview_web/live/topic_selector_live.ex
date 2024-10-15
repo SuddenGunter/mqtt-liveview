@@ -10,14 +10,14 @@ defmodule MqttLiveviewWeb.TopicSelectorLive do
   def mount(params, _session, socket) do
     {:ok,
      assign(socket,
-       form: to_form(params),
-       already_subscribed: false
+       form: to_form(params)
      )}
   end
 
   @impl true
   def handle_event("subscribe", params, socket) do
     topic = params["topic"]
+    ExMQTT.subscribe(topic, 1)
     {:noreply, push_navigate(socket, to: ~p"/topic/#{topic}")}
   end
 end
